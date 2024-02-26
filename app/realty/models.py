@@ -1,3 +1,28 @@
 from django.db import models
+from django.core.validators import MaxValueValidator
 
-# Create your models here.
+
+class Flat(models.Model):
+    ON_SALE = 'ON_SALE'
+    SOLD = 'SOLD'
+
+    CHOICES = (
+        (ON_SALE, 'Доступно к покупке'),
+        (SOLD, 'Продано'),
+    )
+
+    description = models.TextField(verbose_name='Описание', blank=True, max_length=255)
+    photo = models.ImageField(verbose_name='Фото', upload_to="photos/%Y/%m/%d/")
+    price = models.IntegerField(verbose_name='Цена')
+    square = models.IntegerField(verbose_name='Площадь', validators=[MaxValueValidator(1000)])
+    rooms = models.IntegerField(verbose_name='Количество комнат', validators=[MaxValueValidator(50)])
+    floor = models.IntegerField(verbose_name='Этаж', validators=[MaxValueValidator(25)])
+    number = models.IntegerField(verbose_name='Номер', validators=[MaxValueValidator(1000)])
+    status = models.TextField(verbose_name='Статус', max_length=255, choices=CHOICES)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Квартира'
+        verbose_name_plural = 'Квартиры'
