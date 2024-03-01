@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from realty.views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/flats/', FlatListAPI.as_view()),
+    path('api/flats/<int:pk>', FlatDetailAPI.as_view()),
 ]
