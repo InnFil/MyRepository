@@ -16,13 +16,28 @@ class Flat(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     square = models.IntegerField(verbose_name='Площадь', validators=[MaxValueValidator(1000)])
     rooms = models.IntegerField(verbose_name='Количество комнат', validators=[MaxValueValidator(50)])
-    floor = models.IntegerField(verbose_name='Этаж', validators=[MaxValueValidator(25)])
     number = models.IntegerField(verbose_name='Номер', validators=[MaxValueValidator(1000)])
     status = models.TextField(verbose_name='Статус', max_length=255, choices=CHOICES)
+    floor = models.ForeignKey('Floor', on_delete=models.PROTECT)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     class Meta:
         verbose_name = 'Квартира'
         verbose_name_plural = 'Квартиры'
+
+
+class Floor(models.Model):
+    DIODE = 'DIODE'
+    LUMINESCENT = 'LUMINESCENT'
+
+    CHOICES = (
+        (DIODE, 'Диодное'),
+        (LUMINESCENT, 'Люминесцентное'),
+    )
+
+    number = models.IntegerField(verbose_name='Номер', validators=[MaxValueValidator(25)])
+    color = models.TextField(verbose_name='Цвет', validators=[MaxValueValidator(225)])
+    lighting = models.TextField(verbose_name='Освещение', validators=[MaxValueValidator(225)], choices=CHOICES)
