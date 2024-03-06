@@ -32,7 +32,7 @@ class FlatDetailAPI(APIView):
         price = serializers.IntegerField()
         square = serializers.IntegerField()
         rooms = serializers.IntegerField()
-        floor = serializers.IntegerField()
+        floor = serializers.IntegerField(source='floor.number')
         number = serializers.IntegerField()
         status = serializers.CharField()
 
@@ -45,7 +45,7 @@ class FlatDetailAPI(APIView):
             return Response(f"Отсутствует квартира с id равным {pk}")
 
 
-class FloorInformationAPI(APIView):
+class FloorDetailAPI(APIView):
     class FloorSerializer(serializers.Serializer):
         class FlatSerializer(serializers.Serializer):
             id = serializers.IntegerField()
@@ -64,6 +64,10 @@ class FloorInformationAPI(APIView):
         flat_set = FlatSerializer(many=True)
 
     def get(self, request, pk):
-        floors = Floor.objects.get(id=pk)
-        data = self.FloorSerializer(floors).data
+        try:
+            floor = Floor.objects.get(id=pk)
+        except ObjectDoesNotExist:
+            return Response(f"Отсутствует выбранный этаж")
+        data = self.FloorSerializer(floor).data
         return Response(data)
+
