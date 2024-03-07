@@ -49,14 +49,14 @@ class Section(models.Model):
 
 
 class Building(models.Model):
-    COMPLITE = 'COMPLITE'
+    COMPLETE = 'COMPLETE'
     CONSTRUCTION = 'CONSTRUCTION'
     BRICK = 'BRICK'
     PANEL = 'PANEL'
     MONOLITHIC = 'MONOLITHIC'
 
     STATUS_CHOICES = (
-        (COMPLITE, 'Сдан'),
+        (COMPLETE, 'Сдан'),
         (CONSTRUCTION, 'Строится'),
     )
     HOUSE_TYPE_CHOICES = (
@@ -69,9 +69,9 @@ class Building(models.Model):
     number = models.IntegerField(verbose_name='Номер')
     floors = models.IntegerField(verbose_name='Количество этажей')
     entrances = models.IntegerField(verbose_name='Количество подъездов')
-    due_date = models.DateField(verbose_name='Дата сдачи')
-    status = models.TextField(verbose_name='Статус', choices=STATUS_CHOICES)
-    house_type = models.TextField(verbose_name='Тип дома', choices=HOUSE_TYPE_CHOICES)
+    completion_date = models.DateField(verbose_name='Дата сдачи')
+    status = models.TextField(verbose_name='Статус', choices=STATUS_CHOICES, default=COMPLETE)
+    house_type = models.TextField(verbose_name='Тип дома', choices=HOUSE_TYPE_CHOICES, default=BRICK)
 
     class Meta:
         unique_together = ('address', 'number')
