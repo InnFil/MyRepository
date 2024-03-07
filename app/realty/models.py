@@ -20,6 +20,7 @@ class Flat(models.Model):
     status = models.TextField(verbose_name='Статус', max_length=255, choices=CHOICES)
     floor = models.ForeignKey('Floor', on_delete=models.PROTECT)
     section = models.ForeignKey('Section', on_delete=models.PROTECT, null=True)
+    building = models.ForeignKey('Building', on_delete=models.PROTECT, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -45,3 +46,32 @@ class Floor(models.Model):
 
 class Section(models.Model):
     name = models.TextField(verbose_name='Название', max_length=255, unique=True)
+
+
+class Building(models.Model):
+    COMPLITE = 'COMPLITE'
+    CONSTRUCTION = 'CONSTRUCTION'
+    BRICK = 'BRICK'
+    PANEL = 'PANEL'
+    MONOLITHIC = 'MONOLITHIC'
+
+    STATUS_CHOICES = (
+        (COMPLITE, 'Сдан'),
+        (CONSTRUCTION, 'Строится'),
+    )
+    HOUSE_TYPE_CHOICES = (
+        (BRICK, 'Кирпичный'),
+        (PANEL, 'Панельный'),
+        (MONOLITHIC, 'Монолитный')
+    )
+
+    address = models.TextField(verbose_name='Aдрес')
+    number = models.IntegerField(verbose_name='Номер')
+    floors = models.IntegerField(verbose_name='Количество этажей')
+    entrances = models.IntegerField(verbose_name='Количество подъездов')
+    due_date = models.DateField(verbose_name='Дата сдачи')
+    status = models.TextField(verbose_name='Статус', choices=STATUS_CHOICES)
+    house_type = models.TextField(verbose_name='Тип дома', choices=HOUSE_TYPE_CHOICES)
+
+    class Meta:
+        unique_together = ('address', 'number')
