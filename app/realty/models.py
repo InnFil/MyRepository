@@ -44,5 +44,4 @@ class Floor(models.Model):
 
 
 class Section(models.Model):
-    name = models.TextField(verbose_name='Название', blank=True, max_length=255)
-    number = models.IntegerField(verbose_name='Номер', validators=[MaxValueValidator(3)])
+    name = models.TextField(verbose_name='Название', max_length=255, unique=True)
