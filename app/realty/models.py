@@ -19,6 +19,7 @@ class Flat(models.Model):
     number = models.IntegerField(verbose_name='Номер', validators=[MaxValueValidator(1000)])
     status = models.TextField(verbose_name='Статус', max_length=255, choices=CHOICES)
     floor = models.ForeignKey('Floor', on_delete=models.PROTECT)
+    section = models.ForeignKey('Section', on_delete=models.PROTECT, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -40,3 +41,7 @@ class Floor(models.Model):
     number = models.IntegerField(verbose_name='Номер', validators=[MaxValueValidator(25)])
     color = models.TextField(verbose_name='Цвет', validators=[MaxValueValidator(225)])
     lighting = models.TextField(verbose_name='Освещение', validators=[MaxValueValidator(225)], choices=CHOICES)
+
+
+class Section(models.Model):
+    name = models.TextField(verbose_name='Название', max_length=255, unique=True)
