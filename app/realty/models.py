@@ -82,5 +82,3 @@ class Project(models.Model):
     name = models.TextField(verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
 
-    class Meta:
-        unique_together = ('name', 'flats')
