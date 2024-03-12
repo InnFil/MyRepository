@@ -1,9 +1,6 @@
 from django.urls import path
-from realty.views import FlatListAPI
-from realty.views import FlatDetailAPI
-from realty.views import FloorDetailAPI
-from realty.views import BuildingListAPI
-from realty.views import BuildingDetailAPI
+
+from realty.views import FlatListAPI, FlatDetailAPI, FloorDetailAPI, BuildingListAPI, BuildingDetailAPI
 
 urlpatterns = [
     path('flats/', FlatListAPI.as_view()),

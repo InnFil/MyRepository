@@ -4,6 +4,9 @@ from rest_framework.views import APIView
 from realty.models import Flat, Floor, Building
 from django.db.models import ObjectDoesNotExist
 
+from realty.selectors import FlatsSelector, FlatDetailSelector, FloorDetailSelector, BuildingListSelector, \
+    BuildingDetailSelector
+
 
 class FlatListAPI(APIView):
     class FlatSerializer(serializers.Serializer):
@@ -18,8 +21,9 @@ class FlatListAPI(APIView):
         status = serializers.CharField()
 
     def get(self, request):
-        flats = Flat.objects.all()
-        data = self.FlatSerializer(flats, many=True).data
+        flats_selector = FlatsSelector()
+        flats_list = flats_selector.flats_list()
+        data = self.FlatSerializer(flats_list, many=True).data
         return Response(data)
 
 
@@ -36,12 +40,10 @@ class FlatDetailAPI(APIView):
         status = serializers.CharField()
 
     def get(self, request, pk):
-        try:
-            flat = Flat.objects.get(id=pk)
-            data = self.FlatSerializer(flat).data
-            return Response(data)
-        except ObjectDoesNotExist:
-            return Response(f"Отсутствует квартира с id равным {pk}")
+        flat_detail_selector = FlatDetailSelector()
+        flat_detail = flat_detail_selector.detail_flat(pk)
+        data = self.FlatSerializer(flat_detail).data
+        return Response(data)
 
 
 class FloorDetailAPI(APIView):
@@ -63,11 +65,9 @@ class FloorDetailAPI(APIView):
         flat_set = FlatSerializer(many=True)
 
     def get(self, request, pk):
-        try:
-            floor = Floor.objects.get(id=pk)
-        except ObjectDoesNotExist:
-            return Response(f"Отсутствует выбранный этаж")
-        data = self.FloorSerializer(floor).data
+        floor_detail_selector = FloorDetailSelector()
+        floor_detail = floor_detail_selector.detail_floor(pk)
+        data = self.FloorSerializer(floor_detail).data
         return Response(data)
 
 
@@ -83,8 +83,9 @@ class BuildingListAPI(APIView):
         house_type = serializers.CharField()
 
     def get(self, request):
-        building = Building.objects.all()
-        data = self.BuildingSerializer(building, many=True).data
+        building_list_selector = BuildingListSelector()
+        building_list = building_list_selector.building_list()
+        data = self.BuildingSerializer(building_list, many=True).data
         return Response(data)
 
 
@@ -105,9 +106,7 @@ class BuildingDetailAPI(APIView):
         flat_set = FlatSerializer(many=True)
 
     def get(self, request, pk):
-        try:
-            building = Building.objects.get(id=pk)
-        except ObjectDoesNotExist:
-            return Response(f"Отсутствует выбранный корпус")
-        data = self.BuildingSerializer(building).data
+        building_detail_selector = BuildingDetailSelector()
+        building_detail = building_detail_selector.detail_building(pk)
+        data = self.BuildingSerializer(building_detail).data
         return Response(data)
