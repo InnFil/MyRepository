@@ -16,7 +16,7 @@ class FlatDetailSelector:
             flat = Flat.objects.get(id=pk)
             return flat
         except ObjectDoesNotExist:
-            return Response(f"Отсутствует квартира с id равным {pk}")
+            raise
 
 
 class FloorDetailSelector:
@@ -25,7 +25,7 @@ class FloorDetailSelector:
             floor = Floor.objects.get(id=pk)
             return floor
         except ObjectDoesNotExist:
-            return Response(f"Отсутствует выбранный этаж")
+            raise
 
 
 class BuildingListSelector:
@@ -40,4 +40,4 @@ class BuildingDetailSelector:
             building = Building.objects.get(id=pk)
             return building
         except ObjectDoesNotExist:
-            return Response(f"Отсутствует выбранный корпус")
+            raise
