@@ -5,13 +5,13 @@ from realty.models import Flat, Floor, Building
 
 
 class FlatsSelector:
-    def flats_list(self):
+    def list_flats(self):
         flats = Flat.objects.all()
         return flats
 
 
 class FlatDetailSelector:
-    def detail_flat(self, pk):
+    def flat_detail(self, pk):
         try:
             flat = Flat.objects.get(id=pk)
             return flat
@@ -20,7 +20,7 @@ class FlatDetailSelector:
 
 
 class FloorDetailSelector:
-    def detail_floor(self, pk):
+    def floor_detail(self, pk):
         try:
             floor = Floor.objects.get(id=pk)
             return floor
@@ -29,7 +29,7 @@ class FloorDetailSelector:
 
 
 class BuildingListSelector:
-    def building_list(self):
+    def list_building(self):
         building = Building.objects.all()
         return building
 

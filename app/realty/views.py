@@ -22,8 +22,8 @@ class FlatListAPI(APIView):
 
     def get(self, request):
         flats_selector = FlatsSelector()
-        flats_list = flats_selector.flats_list()
-        data = self.FlatSerializer(flats_list, many=True).data
+        list_flats = flats_selector.list_flats()
+        data = self.FlatSerializer(list_flats, many=True).data
         return Response(data)
 
 
@@ -41,7 +41,7 @@ class FlatDetailAPI(APIView):
 
     def get(self, request, pk):
         flat_detail_selector = FlatDetailSelector()
-        flat_detail = flat_detail_selector.detail_flat(pk)
+        flat_detail = flat_detail_selector.flat_detail(pk)
         data = self.FlatSerializer(flat_detail).data
         return Response(data)
 
@@ -66,7 +66,7 @@ class FloorDetailAPI(APIView):
 
     def get(self, request, pk):
         floor_detail_selector = FloorDetailSelector()
-        floor_detail = floor_detail_selector.detail_floor(pk)
+        floor_detail = floor_detail_selector.floor_detail(pk)
         data = self.FloorSerializer(floor_detail).data
         return Response(data)
 
@@ -84,8 +84,8 @@ class BuildingListAPI(APIView):
 
     def get(self, request):
         building_list_selector = BuildingListSelector()
-        building_list = building_list_selector.building_list()
-        data = self.BuildingSerializer(building_list, many=True).data
+        list_building = building_list_selector.list_building()
+        data = self.BuildingSerializer(list_building, many=True).data
         return Response(data)
 
 
@@ -106,7 +106,7 @@ class BuildingDetailAPI(APIView):
         flat_set = FlatSerializer(many=True)
 
     def get(self, request, pk):
-        building_detail_selector = BuildingDetailSelector()
-        building_detail = building_detail_selector.detail_building(pk)
-        data = self.BuildingSerializer(building_detail).data
+        detail_building_selector = BuildingDetailSelector()
+        detail_building = detail_building_selector.detail_building(pk)
+        data = self.BuildingSerializer(detail_building).data
         return Response(data)
