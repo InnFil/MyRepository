@@ -72,6 +72,13 @@ class Building(models.Model):
     completion_date = models.DateField(verbose_name='Дата сдачи')
     status = models.TextField(verbose_name='Статус', choices=STATUS_CHOICES, default=COMPLETE)
     house_type = models.TextField(verbose_name='Тип дома', choices=HOUSE_TYPE_CHOICES, default=BRICK)
+    project = models.ForeignKey('Project', on_delete=models.PROTECT, null=True)
 
     class Meta:
         unique_together = ('address', 'number')
+
+
+class Project(models.Model):
+    name = models.TextField(verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
+
