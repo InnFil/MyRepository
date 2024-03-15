@@ -39,9 +39,9 @@ class BuildingDetailSelector:
     def detail_building(self, pk):
         try:
             building = Building.objects.get(id=pk)
-            return building
         except ObjectDoesNotExist:
             raise
+        return building
 
 
 class ProjectListSelector:
@@ -54,8 +54,8 @@ class ProjectDetailSelector:
     def detail_project(self, pk):
         try:
             project = Project.objects.get(id=pk)
-            return project
         except ObjectDoesNotExist:
             raise
+        return project
 
 
