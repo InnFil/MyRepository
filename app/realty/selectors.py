@@ -1,7 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Count
 from rest_framework.response import Response
 
-from realty.models import Flat, Floor, Building
+from realty.models import Flat, Floor, Building, Project
 
 
 class FlatsSelector:
@@ -41,3 +42,17 @@ class BuildingDetailSelector:
             return building
         except ObjectDoesNotExist:
             raise
+
+
+class ProjectListSelector:
+    def list_projects(self):
+        projects = Project.objects.all()
+        return projects
+
+
+class ProjectDetailSelector:
+    def detail_project(self, pk):
+        project = Project.objects.get(id=pk)
+        return project
+
+

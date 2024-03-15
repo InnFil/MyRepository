@@ -81,4 +81,3 @@ class Building(models.Model):
 class Project(models.Model):
     name = models.TextField(verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
-
