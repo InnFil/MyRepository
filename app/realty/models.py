@@ -96,6 +96,8 @@ class Building(models.Model):
 
     class Meta:
         unique_together = ('address', 'number')
+        verbose_name = 'Корпус'
+        verbose_name_plural = 'Корпуса'
 
 
 class Project(models.Model):
