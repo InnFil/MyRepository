@@ -57,6 +57,9 @@ class Floor(models.Model):
 class Section(models.Model):
     name = models.TextField(verbose_name='Название', max_length=255, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Building(models.Model):
     COMPLETE = 'COMPLETE'
@@ -83,6 +86,9 @@ class Building(models.Model):
     status = models.TextField(verbose_name='Статус', choices=STATUS_CHOICES, default=COMPLETE)
     house_type = models.TextField(verbose_name='Тип дома', choices=HOUSE_TYPE_CHOICES, default=BRICK)
     project = models.ForeignKey('Project', on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return self.house_type
 
     class Meta:
         unique_together = ('address', 'number')
