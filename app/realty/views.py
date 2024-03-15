@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from realty.models import Flat, Floor, Building
+from realty.models import Flat, Floor, Building, Project
 from django.db.models import ObjectDoesNotExist
 
 from realty.selectors import FlatsSelector, FlatDetailSelector, FloorDetailSelector, BuildingListSelector, \
-    BuildingDetailSelector
+    BuildingDetailSelector, ProjectListSelector, ProjectDetailSelector
 
 
 class FlatListAPI(APIView):
@@ -101,12 +101,46 @@ class BuildingDetailAPI(APIView):
             number = serializers.IntegerField()
             status = serializers.CharField()
 
-        floors = serializers.IntegerField()
         id = serializers.IntegerField()
+        floors = serializers.IntegerField()
         flat_set = FlatSerializer(many=True)
 
     def get(self, request, pk):
         detail_building_selector = BuildingDetailSelector()
         detail_building = detail_building_selector.detail_building(pk)
         data = self.BuildingSerializer(detail_building).data
+        return Response(data)
+
+
+class ProjectListAPI(APIView):
+    class ProjectSerializer(serializers.Serializer):
+        id = serializers.IntegerField()
+        name = serializers.CharField()
+        description = serializers.CharField()
+
+    def get(self, request):
+        projects_selector = ProjectListSelector()
+        list_projects = projects_selector.list_projects()
+        data = self.ProjectSerializer(list_projects, many=True).data
+        return Response(data)
+
+
+class ProjectDetailAPI(APIView):
+    class ProjectSerializer(serializers.Serializer):
+        class BuildingSerializer(serializers.Serializer):
+            id = serializers.IntegerField()
+            completion_date = serializers.DateField()
+            flat_count = serializers.SerializerMethodField()
+
+            def get_flat_count(self, instance: Building):
+                return instance.flat_set.count()
+
+        id = serializers.IntegerField()
+        name = serializers.CharField()
+        description = serializers.CharField()
+        buildings = BuildingSerializer(source='building_set', many=True)
+
+    def get(self, request, pk):
+        project = ProjectDetailSelector().detail_project(pk)
+        data = self.ProjectSerializer(project).data
         return Response(data)

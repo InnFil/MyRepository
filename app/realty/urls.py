@@ -1,6 +1,7 @@
 from django.urls import path
 
-from realty.views import FlatListAPI, FlatDetailAPI, FloorDetailAPI, BuildingListAPI, BuildingDetailAPI
+from realty.views import FlatListAPI, FlatDetailAPI, FloorDetailAPI, BuildingListAPI, BuildingDetailAPI, \
+    ProjectListAPI, ProjectDetailAPI
 
 urlpatterns = [
     path('flats/', FlatListAPI.as_view()),
@@ -8,4 +9,6 @@ urlpatterns = [
     path('floors/<int:pk>', FloorDetailAPI.as_view()),
     path('building/', BuildingListAPI.as_view()),
     path('building/<int:pk>', BuildingDetailAPI.as_view()),
+    path('projects/', ProjectListAPI.as_view()),
+    path('projects/<int:pk>', ProjectDetailAPI.as_view()),
 ]
