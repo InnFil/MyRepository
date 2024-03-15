@@ -25,6 +25,9 @@ class Flat(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.description
+
     class Meta:
         verbose_name = 'Квартира'
         verbose_name_plural = 'Квартиры'
@@ -43,8 +46,6 @@ class Floor(models.Model):
     color = models.TextField(verbose_name='Цвет', validators=[MaxValueValidator(225)])
     lighting = models.TextField(verbose_name='Освещение', validators=[MaxValueValidator(225)], choices=CHOICES)
 
-<<<<<<< Updated upstream
-=======
     def __str__(self):
         return str(self.number)
 
@@ -52,7 +53,6 @@ class Floor(models.Model):
         verbose_name = 'Этаж'
         verbose_name_plural = 'Этажи'
 
->>>>>>> Stashed changes
 
 class Section(models.Model):
     name = models.TextField(verbose_name='Название', max_length=255, unique=True)
