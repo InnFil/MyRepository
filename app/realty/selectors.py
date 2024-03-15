@@ -52,7 +52,10 @@ class ProjectListSelector:
 
 class ProjectDetailSelector:
     def detail_project(self, pk):
-        project = Project.objects.get(id=pk)
-        return project
+        try:
+            project = Project.objects.get(id=pk)
+            return project
+        except ObjectDoesNotExist:
+            raise
 
 
