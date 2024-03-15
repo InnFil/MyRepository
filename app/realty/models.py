@@ -49,6 +49,10 @@ class Floor(models.Model):
     def __str__(self):
         return str(self.number)
 
+    class Meta:
+        verbose_name = 'Этаж'
+        verbose_name_plural = 'Этажи'
+
 
 class Section(models.Model):
     name = models.TextField(verbose_name='Название', max_length=255, unique=True)
