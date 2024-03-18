@@ -84,6 +84,7 @@ class Building(models.Model):
 
     address = models.TextField(verbose_name='Aдрес')
     number = models.IntegerField(verbose_name='Номер')
+    photo = models.ImageField(verbose_name='Фото', upload_to="photos/%Y/%m/%d/", null=True)
     floors = models.IntegerField(verbose_name='Количество этажей')
     entrances = models.IntegerField(verbose_name='Количество подъездов', blank=True, null=True)
     completion_date = models.DateField(verbose_name='Дата сдачи')
@@ -103,6 +104,7 @@ class Building(models.Model):
 class Project(models.Model):
     name = models.TextField(verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
+
 
     def __str__(self):
         return self.name
