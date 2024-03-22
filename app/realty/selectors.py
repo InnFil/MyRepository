@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 
-from realty.Repository import FlatRepository, FloorRepository, BuildingRepository, ProjectRepository
+from realty.repository import FlatRepository, FloorRepository, BuildingRepository, ProjectRepository
 
 
 class FlatsSelector:
