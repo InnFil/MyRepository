@@ -25,7 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
-    path('api/', include('realty.urls'))
+    path('api/', include('realty.domain.flat.urls')),
+    path('api/', include('realty.domain.floor.urls')),
+    path('api/', include('realty.domain.project.urls')),
+    path('api/', include('realty.domain.building.urls'))
 ]
 
 if settings.DEBUG:
