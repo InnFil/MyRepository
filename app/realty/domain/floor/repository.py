@@ -1,11 +1,6 @@
 from realty.models.floor import Floor
+from realty.domain.common_repository import BaseRepository
 
 
-class FloorRepository:
-    model = None
-
-    def get_list(self):
-        return Floor.objects.all()
-
-    def get_detail(self, pk):
-        return Floor.objects.get(id=pk)
+class FloorRepository(BaseRepository):
+    model = Floor

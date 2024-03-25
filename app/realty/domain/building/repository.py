@@ -1,9 +1,6 @@
 from realty.models.building import Building
+from realty.domain.common_repository import BaseRepository
 
 
-class BuildingRepository:
-    def get_list(self):
-        return Building.objects.all()
-
-    def get_detail(self, pk):
-        return Building.objects.get(id=pk)
+class BuildingRepository(BaseRepository):
+    model = Building

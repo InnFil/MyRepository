@@ -1,9 +1,6 @@
 from realty.models.project import Project
+from realty.domain.common_repository import BaseRepository
 
 
-class ProjectRepository:
-    def get_list(self):
-        return Project.objects.all()
-
-    def get_detail(self, pk):
-        return Project.objects.get(id=pk)
+class ProjectRepository(BaseRepository):
+    model = Project
