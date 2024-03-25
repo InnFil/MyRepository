@@ -4,7 +4,7 @@ from realty.selectors import FlatsSelector, FlatDetailSelector
 from realty.models import Flat, Floor, Section, Building, Project
 
 
-class FlatTest(TestCase):
+class FlatsSelectorTest(TestCase):
     def test_list_flats(self):
         floor = Floor.objects.create(number=2, color='Бежевый', lighting=Floor.DIODE)
         section = Section.objects.create(name='Вид на озеро')
@@ -24,8 +24,9 @@ class FlatTest(TestCase):
 
         selector_result = FlatsSelector().list_flats()
 
-        self.assertIn(flat, selector_result, 'ОБЪЕКТА НЕТ В СПИСКЕ')
-        self.assertIn(flat_2, selector_result, 'ОБЪЕКТА НЕТ В СПИСКЕ')
+        self.assertEqual(len(selector_result), 2)
+        self.assertIn(flat, selector_result)
+        self.assertIn(flat_2, selector_result)
 
     def test_flat_detail(self):
         floor = Floor.objects.create(number=2, color='Бежевый', lighting=Floor.DIODE)
@@ -41,4 +42,5 @@ class FlatTest(TestCase):
         )
 
         selector_result = FlatDetailSelector().flat_detail(pk=flat.id)
+
         self.assertEqual(flat, selector_result)
