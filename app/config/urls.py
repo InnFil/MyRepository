@@ -21,14 +21,17 @@ from django.urls import include, path
 
 from config import settings
 
+api_v1_urls = [
+    path('flats/', include('realty.domain.flat.urls')),
+    path('projects/', include('realty.domain.project.urls')),
+    path('building/', include('realty.domain.building.urls')),
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
-    path('api/', include('realty.domain.flat.urls')),
-    path('api/', include('realty.domain.floor.urls')),
-    path('api/', include('realty.domain.project.urls')),
-    path('api/', include('realty.domain.building.urls'))
+    path('api/v1/', include(api_v1_urls))
 ]
 
 if settings.DEBUG:
