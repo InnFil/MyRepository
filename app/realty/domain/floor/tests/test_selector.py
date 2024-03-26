@@ -4,7 +4,7 @@ from realty.domain.floor.selectors import FloorDetailSelector
 from realty.models.floor import Floor
 
 
-class FloorTest(TestCase):
+class FloorSelectorTest(TestCase):
     def test_floor_detail(self):
         floor = Floor.objects.create(number=1, color='Бежевый', lighting=Floor.LUMINESCENT)
 
