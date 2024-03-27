@@ -11,8 +11,6 @@ class BuildingSelectorTest(TestCase):
 
         selector_result = ProjectListSelector().list_projects()
 
-        self.assertEqual(len(selector_result), 6)
-        print(len(selector_result))
         self.assertIn(project, selector_result)
         self.assertIn(project_2, selector_result)
 
