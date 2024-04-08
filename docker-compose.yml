@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    env_file:
+      - ./app/.env
+    ports:
+      - 5432:5432
+    volumes:
+      - .:/app
+
+  app:
+    image: python:3.11
+    build: .
+    env_file:
+      - ./app/.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
