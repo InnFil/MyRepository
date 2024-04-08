@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'realty.apps.RealtyConfig',
     'drf_spectacular',
-    'realty.apps.AppConfig'
+    'realty.apps.AccountConfig'
 ]
 
 REST_FRAMEWORK = {
