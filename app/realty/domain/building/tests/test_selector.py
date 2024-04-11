@@ -1,8 +1,8 @@
 from unittest import TestCase
 
 from realty.domain.building.selectors import BuildingDetailSelector, BuildingListSelector
-from realty.models.building import Building
-from realty.models.project import Project
+from realty.models import Building
+from realty.models import Project
 
 
 class BuildingSelectorTest(TestCase):
