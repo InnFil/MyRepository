@@ -7,15 +7,21 @@ services:
       - ./app/.env
     ports:
       - 5432:5432
-    volumes:
-      - .:/app
 
-  app:
-    image: python:3.11
+
+  main_app:
+    restart: always
     build: .
+    image: prefix/python:3.11
     env_file:
       - ./app/.env
     ports:
       - 8000:8000
     depends_on:
       - db
+    volumes:
+      - ./app:/app
+
+
+volumes:
+  app:

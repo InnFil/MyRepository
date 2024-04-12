@@ -1,4 +1,4 @@
-from realty.models.building import Building
+from realty.models import Building
 from realty.domain.common_repository import BaseRepository
 
 

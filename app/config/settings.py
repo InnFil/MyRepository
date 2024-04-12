@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'realty.apps.RealtyConfig',
     'drf_spectacular',
-    'realty.apps.AccountConfig'
+    'realty.apps.RealtyConfig',
+    'account.apps.AccountConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -92,7 +92,6 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
-
     }
 }
 
@@ -141,3 +140,5 @@ MEDIA_URL = '/photos/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'account.User'

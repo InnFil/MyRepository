@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from realty.models.flat import Flat
-from realty.models.floor import Floor
-from realty.models.section import Section
-from realty.models.building import Building
-from realty.models.project import Project
+from realty.models import Flat
+from realty.models import Floor
+from realty.models import Section
+from realty.models import Building
+from realty.models import Project
 
 
 admin.site.register(Flat)
