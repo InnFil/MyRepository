@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'realty.apps.RealtyConfig',
     'account.apps.AccountConfig',
 ]
-#
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
