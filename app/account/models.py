@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from account.managers import UserManager
 from django.db import models
 
@@ -26,3 +28,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         unique_together = ('username', 'email', 'phone')
+
+
+class LoginCode(models.Model):
+    phone_number = models.CharField(verbose_name='Номер телефона')
+    code = models.IntegerField(verbose_name='Код')
+    create_at = models.DateTimeField(verbose_name='Дата и время создания', auto_now_add=True)
