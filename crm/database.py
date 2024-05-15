@@ -16,8 +16,3 @@ database_url = os.getenv('DATABASE_URL')
 engine = create_engine(database_url)
 
 session_maker = sessionmaker(autoflush=False, bind=engine)
-
-load_dotenv()
-
-
-
