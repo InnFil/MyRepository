@@ -1,12 +1,23 @@
+import os
+
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
-
-from crm.config import database_key
-
-engine = create_engine(database_key)
-
-session_maker = sessionmaker(autoflush=False, bind=engine)
 
 
 class Base(DeclarativeBase):
     pass
+
+
+load_dotenv()
+
+database_url = os.getenv('DATABASE_URL')
+
+engine = create_engine(database_url)
+
+session_maker = sessionmaker(autoflush=False, bind=engine)
+
+load_dotenv()
+
+
+
