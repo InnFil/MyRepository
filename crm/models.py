@@ -1,21 +1,22 @@
-from sqlalchemy import Integer, String, DateTime, func
-from sqlalchemy.orm import mapped_column
+from datetime import datetime
 
-from database import Base, engine
+from sqlalchemy import func
+from sqlalchemy.orm import mapped_column, Mapped
+
+from crm.database import Base
 
 
 class Flat(Base):
     __tablename__ = "flats"
 
-    id = mapped_column(Integer, primary_key=True, unique=True)
-    price = mapped_column(Integer)
-    description = mapped_column(String)
-    square = mapped_column(Integer)
-    rooms = mapped_column(Integer)
-    number = mapped_column(Integer, unique=True)
-    status = mapped_column(String)
-    created_at = mapped_column(DateTime, default=func.now())
-    updated_at = mapped_column(DateTime, default=func.now(), onupdate=func.now())
+    id: Mapped[int] = mapped_column(primary_key=True, unique=True)
+    photo: Mapped[bytes]
+    price: Mapped[int]
+    description: Mapped[str]
+    square: Mapped[int] = mapped_column(nullable=False)
+    rooms: Mapped[int] = mapped_column(nullable=False)
+    number: Mapped[int] = mapped_column(unique=True, nullable=False)
+    status: Mapped[str]
 
-
-Base.metadata.create_all(bind=engine)
+    created_at: Mapped[datetime] = mapped_column(default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(default=func.now(), onupdate=func.now())

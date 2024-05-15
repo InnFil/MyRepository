@@ -1,11 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-my_database = "postgresql://postgres:1234@127.0.0.1:5432/postgres"
+from crm.config import database_key
 
-engine = create_engine(my_database)
+engine = create_engine(database_key)
 
-Session_maker = sessionmaker(autoflush=False, bind=engine)
+session_maker = sessionmaker(autoflush=False, bind=engine)
 
 
 class Base(DeclarativeBase):
