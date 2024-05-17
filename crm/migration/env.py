@@ -7,8 +7,8 @@ from alembic import context
 
 import sys
 
-from crm.database import database_url
-from crm import Base
+from database import database_url, Base
+from models import Flat
 
 sys.path = ["", ".."] + sys.path[1:]
 

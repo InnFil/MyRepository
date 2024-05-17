@@ -7,6 +7,11 @@ from repository import add_flat
 app = FastAPI()
 
 
+@app.get("/")
+def blank():
+    return {'status': 'ok'}
+
+
 @app.post("/flat/")
 def create_flat(new_flat: FlatSchema):
     add_flat(new_flat)
