@@ -19,7 +19,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.contrib import admin
 from django.urls import include, path
 
-from account.views import AccountAPI, AuthorizationCodeAPI
+from account.views import AccountAPI, AuthorizationCodeAPI, AuthAPI
+
 from config import settings
 
 api_v1_urls = [

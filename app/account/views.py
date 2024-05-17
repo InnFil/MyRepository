@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from account.constants import CODE_LIFETIME
-from account.models import LoginCode
+from account.models import LoginCode, User
 
 
 class AccountAPI(APIView):
@@ -35,3 +35,12 @@ class AuthorizationCodeAPI(APIView):
         if expiration_at < timezone.now():
             raise AuthenticationFailed("Истек срок действия кода")
         return Response({'status': 'ok'})
+
+
+# class AuthAPI(APIView):
+#     def authenticate(self, request, username=None, password=None):
+#         phone_number = request.data.get("phone_number")
+#         if phone_number in User.objects.filter(phone=phone_number):
+#             return Response({'status': 'ok'})
+#         else:
+#             raise AuthenticationFailed("Проблема авторизации пользователя.")
