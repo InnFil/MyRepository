@@ -1,4 +1,4 @@
-from crm.models import Flat
-from crm.database import Base
+from models import Flat
+from database import Base
 
 __all__ = (Base, Flat)
